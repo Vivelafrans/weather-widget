@@ -2,20 +2,13 @@
   text-align: center;
 }
 
-.Widget-logo {
-  height: 40vmin;
+.widget-logo-big {
+  height: 100px;
 }
 
-/* .Widget-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
+.widget-logo-small {
+  height: 50px;
+}
 
 .Weather-widget {
   text-align: center;
@@ -35,7 +28,7 @@
   border-radius: 15px;
 }
 
-.Weather-forecast{
+.Weather-forecast {
   border-style: solid;
   border-radius: 15px;
   display: flex;
