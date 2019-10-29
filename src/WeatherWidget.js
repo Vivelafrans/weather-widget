@@ -14,7 +14,7 @@ class WeatherWidget extends React.Component {
       forecastTomorrow: {},
       forecastDayAfterTomorrow: {},
       isLoading: true,
-      temperature: false
+      fahrenheit: false
     };
   }
 
@@ -45,9 +45,9 @@ class WeatherWidget extends React.Component {
     return Math.floor((temp - 32) * (5 / 9));
   }
 
-  changeTemp() {
+  changeUnitTemp() {
     this.setState({
-      temperature: !this.state.temperature
+      fahrenheit: !this.state.fahrenheit
     });
   }
 
@@ -89,18 +89,21 @@ class WeatherWidget extends React.Component {
     const todayTemperatureLow = this.state.forecastToday.apparentTemperatureLow;
     const todayTemperatureHigh = this.state.forecastToday
       .apparentTemperatureHigh;
+    const todaysDate = this.state.forecastToday.time;
 
     const tomorrowIcon = this.state.forecastTomorrow.icon;
     const tomorrowTemperatureLow = this.state.forecastTomorrow
       .apparentTemperatureLow;
     const tomorrowTemperatureHigh = this.state.forecastTomorrow
       .apparentTemperatureHigh;
+    const tomorrowsDate = this.state.forecastTomorrow.time;
 
     const dayAfterTomorrowIcon = this.state.forecastDayAfterTomorrow.icon;
     const dayAfterTomorrowTemperatureLow = this.state.forecastDayAfterTomorrow
       .apparentTemperatureLow;
     const dayAfterTomorrowTemperatureHigh = this.state.forecastDayAfterTomorrow
       .apparentTemperatureHigh;
+    const dayAfterTomorrowsDate = this.state.forecastDayAfterTomorrow.time;
 
     return (
       <div className='weather-widget'>
@@ -114,8 +117,11 @@ class WeatherWidget extends React.Component {
             <div className='top-grid'>
               <div className='center header'>
                 <h1>Current Weather</h1>
-                <div className='temp-button' onClick={() => this.changeTemp()}>
-                  {this.state.temperature ? "°F" : "°C"}
+                <div
+                  className='temp-button'
+                  onClick={() => this.changeUnitTemp()}
+                >
+                  {this.state.fahrenheit ? "°F" : "°C"}
                 </div>
               </div>
 
@@ -128,7 +134,7 @@ class WeatherWidget extends React.Component {
               </div>
               <div className='center temp'>
                 <h2>
-                  {this.state.temperature
+                  {this.state.fahrenheit
                     ? `${Math.round(currentTemperature)}°F`
                     : `${this.toCelcius(currentTemperature)}°C`}
                 </h2>
@@ -145,7 +151,7 @@ class WeatherWidget extends React.Component {
 
               <div className='forecast forecast-today'>
                 <div className='center date'>
-                  <p>{this.getDate(this.state.forecastToday.time)}</p>
+                  <p>{this.getDate(todaysDate)}</p>
                 </div>
                 <div className='center small-icon'>
                   <img
@@ -156,7 +162,7 @@ class WeatherWidget extends React.Component {
                 </div>
                 <div className='center small-temp'>
                   <p>
-                    {this.state.temperature
+                    {this.state.fahrenheit
                       ? `${Math.round(todayTemperatureLow)}°F / ${Math.round(
                           todayTemperatureHigh
                         )}°F`
@@ -169,7 +175,7 @@ class WeatherWidget extends React.Component {
 
               <div className='forecast forecast-tomorrow'>
                 <div className='center date'>
-                  <p>{this.getDate(this.state.forecastTomorrow.time)}</p>
+                  <p>{this.getDate(tomorrowsDate)}</p>
                 </div>
                 <div className='center small-icon'>
                   <img
@@ -180,7 +186,7 @@ class WeatherWidget extends React.Component {
                 </div>
                 <div className='center small-temp'>
                   <p>
-                    {this.state.temperature
+                    {this.state.fahrenheit
                       ? `${Math.round(tomorrowTemperatureLow)}°F / ${Math.round(
                           tomorrowTemperatureHigh
                         )}°F`
@@ -193,9 +199,7 @@ class WeatherWidget extends React.Component {
 
               <div className='forecast forecast-day-after-tomorrow'>
                 <div className='center date'>
-                  <p>
-                    {this.getDate(this.state.forecastDayAfterTomorrow.time)}
-                  </p>
+                  <p>{this.getDate(dayAfterTomorrowsDate)}</p>
                 </div>
                 <div className='center small-icon'>
                   <img
@@ -206,7 +210,7 @@ class WeatherWidget extends React.Component {
                 </div>
                 <div className='center small-temp'>
                   <p>
-                    {this.state.temperature
+                    {this.state.fahrenheit
                       ? `${Math.round(
                           dayAfterTomorrowTemperatureLow
                         )}°F / ${Math.round(dayAfterTomorrowTemperatureHigh)}°F`
