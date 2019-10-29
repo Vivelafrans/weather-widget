@@ -15,8 +15,8 @@ const UnitButton = styled.div`
   align-items: center;
   background-color: ${props => (props.toggle ? "#ACA7CB" : "#474554")};
   border: 1px solid white;
-  border-radius: 5px;
   box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   cursor: pointer;
 `;
 
@@ -51,8 +51,6 @@ class WeatherWidget extends React.Component {
         this.setState({
           isLoading: false
         });
-        console.log(this.state.forecastToday);
-        console.log(this.state.forecastTomorrow);
       });
   }
 
