@@ -1,9 +1,24 @@
 import React from "react";
 import WeatherLoader from "./Components/Loader";
+import styled from "styled-components";
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import "./WeatherWidget.css";
-import "./layout.css";
+
+const UnitButton = styled.div`
+  position: relative;
+  left: 50px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => (props.toggle ? "#ACA7CB" : "#474554")};
+  border: 1px solid white;
+  border-radius: 5px;
+  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+`;
 
 class WeatherWidget extends React.Component {
   constructor() {
@@ -116,20 +131,20 @@ class WeatherWidget extends React.Component {
           <div>
             <div className='top-grid'>
               <div className='center header'>
-                <h1>Current Weather</h1>
-                <div
-                  className='temp-button'
+                <h1 className='position-header'>Current Weather</h1>
+                <UnitButton
+                  toggle={this.state.fahrenheit}
                   onClick={() => this.changeUnitTemp()}
                 >
-                  {this.state.fahrenheit ? "°F" : "°C"}
-                </div>
+                  {this.state.fahrenheit ? "°C" : "°F"}
+                </UnitButton>
               </div>
 
               <div className='center icon'>
                 <img
                   src={`./icons/${currentIcon}.svg`}
-                  className='widget-logo-big'
-                  alt='logo'
+                  className='widget-icon-big'
+                  alt='weather-icon'
                 />
               </div>
               <div className='center temp'>
@@ -156,8 +171,8 @@ class WeatherWidget extends React.Component {
                 <div className='center small-icon'>
                   <img
                     src={`./icons/${todayIcon}.svg`}
-                    className='widget-logo-small'
-                    alt='logo'
+                    className='widget-icon-small'
+                    alt='weather-icon'
                   />
                 </div>
                 <div className='center small-temp'>
@@ -180,8 +195,8 @@ class WeatherWidget extends React.Component {
                 <div className='center small-icon'>
                   <img
                     src={`./icons/${tomorrowIcon}.svg`}
-                    className='widget-logo-small'
-                    alt='logo'
+                    className='widget-icon-small'
+                    alt='weather-icon'
                   />
                 </div>
                 <div className='center small-temp'>
@@ -204,8 +219,8 @@ class WeatherWidget extends React.Component {
                 <div className='center small-icon'>
                   <img
                     src={`./icons/${dayAfterTomorrowIcon}.svg`}
-                    className='widget-logo-small'
-                    alt='logo'
+                    className='widget-icon-small'
+                    alt='weather-icon'
                   />
                 </div>
                 <div className='center small-temp'>
